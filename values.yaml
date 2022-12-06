@@ -5,3 +5,10 @@
 #       - 8.8.8.8
 #   podDnsPolicy: None
   # installCRDs: true
+
+# cert-manager:
+#   namespace: cert-manager
+#   createCustomResource: true
+
+dnsName: app.kops.prod.rajmehta.live
+issuerEmail: rajmehta53@live.com

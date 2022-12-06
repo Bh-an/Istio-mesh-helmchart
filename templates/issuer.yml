@@ -7,7 +7,7 @@ spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     #server: https://acme-staging-v02.api.letsencrypt.org/director
-    email: rajmehta53@live.com
+    email: {{ .Values.issuerEmail }}
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:

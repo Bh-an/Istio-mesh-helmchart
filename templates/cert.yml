@@ -20,7 +20,7 @@ spec:
         kind: ClusterIssuer
         group: cert-manager.io
     dnsNames:
-    - "app.kops.prod.rajmehta.live"
+    - {{ .Values.dnsName }}
     # acme:
     #     config:
     #     - http01:
