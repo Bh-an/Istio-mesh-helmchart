@@ -1,11 +1,6 @@
-# istio
+# Istio-mesh helm-chart
 
-### Steps for Deployment
-
-- Deploy cluster from iac repo, then validate cluster using:
-```
-kops validate cluster --state=s3://a4-kops-state-prod --name=kops.prod.rajmehta.live --wait 10m
-```
+## Steps for Deployment
 
 - Create kubectl secret for Docker Image
 
@@ -24,7 +19,7 @@ istioctl install --set profile=default -y
 kubectl label namespace default istio-injection=enabled
 ```
 
-- Install cert-manager
+- Install cert-manager helm-chart
 ```
 helm install \
   cert-manager jetstack/cert-manager \
@@ -34,9 +29,9 @@ helm install \
   --set installCRDs=true
 ```
 
-- Install istio helm chart using:
+- Install istio helm-chart
 ```
-helm install istio-cert -f values.yaml .
+helm install istio-cert -f values.yaml <path_to_chart>
 ```
 
 - Istio Endpoints
@@ -50,12 +45,8 @@ export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
 echo $GATEWAY_URL
 ```
 
-- Paste the gateway url as an Alias record in your subdomain!
+*Paste the gateway url as an Alias record in your subdomain!*
 
-- Apply webapp Helm Chart
-```
-helm install webapp -f values.yaml . 
-```
 
 - To Analyze:
 ```
