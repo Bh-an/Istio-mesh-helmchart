@@ -7,21 +7,21 @@ spec:
     selector:
         istio: ingressgateway # use Istio default gateway implementation
     servers:
-    - port:
-        number: 80
-        name: http
-        protocol: HTTP
-      hosts:
-       - "rajmehta.live"
+    # - port:
+    #     number: 80
+    #     name: http
+    #     protocol: HTTP
+    #   hosts:
+    #    - "*"
     - port:
         number: 443
         name: https
         protocol: HTTPS
       hosts:
-      - "rajmehta.live"
+      - {{ .Values.dnsName }}
       tls:
         mode: SIMPLE
-        credentialName: letsencrypt-staging
+        credentialName: letsencrypt-production
 
 ---
 apiVersion: networking.istio.io/v1alpha3
@@ -30,16 +30,31 @@ metadata:
     name: webapp-vs
 spec:
     hosts:
-    - "rajmehta.live"
+    - '*'
     gateways:
     - istio-system/webapp-gateway
     http:
+    # - match:
+    #     - port: 80
+    #     - uri:
+    #         exact: /healthy
+    #   route:
+    #   - destination:
+    #         host: webapp-service
+    #         port:
+    #             number: 8080
+    
     - match:
+        - port: 443
         - uri:
-            exact: /
+            prefix: /
       route:
       - destination:
-            host: testpage
+            host: webapp-service
             port:
                 number: 8080
 
+      retries:
+        attempts: 3
+        perTryTimeout: 0.1s
+        retryOn: gateway-error,connect-failure,refused-stream

@@ -1,0 +1,14 @@
+# cert-manager:
+#   podDnsConfig:
+#     nameservers:
+#       - 1.1.1.1
+#       - 8.8.8.8
+#   podDnsPolicy: None
+  # installCRDs: true
+
+# cert-manager:
+#   namespace: cert-manager
+#   createCustomResource: true
+
+dnsName: app.prod.applicationbhan.me
+issuerEmail: rajmehta53@live.com
