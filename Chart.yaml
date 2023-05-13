@@ -1,5 +1,5 @@
 apiVersion: v2
-name: cert-manager-helm
+name: Istio-mesh
 description: A Helm chart for Kubernetes
 
 type: application
